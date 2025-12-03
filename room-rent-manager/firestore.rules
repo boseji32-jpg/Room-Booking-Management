@@ -1,0 +1,13 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow read/write access to all documents while signed in (perfect for development)
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+    
+    // Optional: allow unauthenticated reads only (comment the line above and uncomment below when ready for production)
+    // allow read: if true;
+    // allow write: if request.auth != null;
+  }
+}
